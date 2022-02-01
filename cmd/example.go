@@ -6,9 +6,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/martinskou/safari/pkg/functional"
-	"github.com/martinskou/safari/pkg/quicksort"
-	"github.com/martinskou/safari/pkg/utils"
+	"github.com/martinskou/safari"
 )
 
 /*
@@ -26,15 +24,15 @@ func RandIntSlice(length int) []int {
 }
 
 func test1(listInt []int) {
-	defer utils.TimeTrack(time.Now(), "Quicksort Generic")
+	defer safari.TimeTrack(time.Now(), "Quicksort Generic")
 	//	listInt := []int{3, 5, 1, 2, 6, 7, 4, 2}
 	//fmt.Println(listInt)
-	quicksort.SortAll(listInt, quicksort.OpCompAsc[int])
+	safari.SortAll(listInt, safari.OpCompAsc[int])
 	//	quicksort.SortAll(listInt, func(a, b int) bool { return a > b })
 	fmt.Println(listInt)
 }
 func test2(listInt []int) {
-	defer utils.TimeTrack(time.Now(), "Build in sort")
+	defer safari.TimeTrack(time.Now(), "Build in sort")
 	//	listInt := []int{3, 5, 1, 2, 6, 7, 4, 2}
 	//	fmt.Println(listInt)
 	sort.Ints(listInt)
@@ -42,7 +40,7 @@ func test2(listInt []int) {
 }
 func test3() {
 	lst := []string{"martin", "lone", "liva", "marcus", "albert", "valdemar"}
-	quicksort.SortAll(lst, quicksort.OpCompAsc[string])
+	safari.SortAll(lst, safari.OpCompAsc[string])
 	fmt.Println(lst)
 }
 
@@ -57,28 +55,28 @@ func AgeComp(a, b Person) bool {
 
 func test4() {
 	lst := []Person{{"martin", 49}, {"lone", 51}, {"liva", 12}, {"marcus", 9}, {"albert", 9}, {"valdemar", 1}}
-	quicksort.SortAll(lst, AgeComp)
+	safari.SortAll(lst, AgeComp)
 	fmt.Println(lst)
 }
 
 func test5() {
 	lst := []Person{{"martin", 49}, {"lone", 51}, {"liva", 12}, {"marcus", 9}, {"albert", 9}, {"valdemar", 1}}
-	mp := functional.SliceToMap(lst, func(p Person) string { return p.Name })
+	mp := safari.SliceToMap(lst, func(p Person) string { return p.Name })
 	fmt.Println(mp)
 
-	keys := functional.MapKeys(mp)
+	keys := safari.MapKeys(mp)
 	fmt.Println(keys)
 
-	values := functional.MapValues(mp)
+	values := safari.MapValues(mp)
 	fmt.Println(values)
 
-	adults := functional.Filter(lst, func(p Person) bool { return p.Age > 17 })
+	adults := safari.Filter(lst, func(p Person) bool { return p.Age > 17 })
 	fmt.Println(adults)
 
-	adultsmap := functional.FilterMap(mp, func(p Person) bool { return p.Age > 17 })
+	adultsmap := safari.FilterMap(mp, func(p Person) bool { return p.Age > 17 })
 	fmt.Println(adultsmap)
 
-	adultages := functional.Map(lst, func(p Person) int { return p.Age })
+	adultages := safari.Map(lst, func(p Person) int { return p.Age })
 	fmt.Println(adultages)
 
 }

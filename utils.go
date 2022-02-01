@@ -1,4 +1,4 @@
-package utils
+package safari
 
 import (
 	"encoding/json"

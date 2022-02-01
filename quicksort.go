@@ -1,4 +1,4 @@
-package quicksort
+package safari
 
 /* Compare function for types using regular compare operator, for other types or sort 
    orders, supply you own compare function. */
