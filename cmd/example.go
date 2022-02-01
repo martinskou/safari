@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"safari/pkg/functional"
-	"safari/pkg/quicksort"
-	"safari/pkg/utils"
 	"sort"
 	"time"
+
+	"github.com/martinskou/safari/pkg/functional"
+	"github.com/martinskou/safari/pkg/quicksort"
+	"github.com/martinskou/safari/pkg/utils"
 )
 
 /*
