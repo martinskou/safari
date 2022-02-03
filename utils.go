@@ -105,7 +105,7 @@ func Render(w io.Writer, template_filenames []string, data any) error {
 
 func RenderString(tfn string, data interface{}) string {
 	var buf bytes.Buffer
-	err := Render(&buf, "", tfn, data)
+	err := Render(&buf, []string{tfn}, data)
 	if err != nil {
 		return err.Error()
 	}
