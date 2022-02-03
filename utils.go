@@ -9,6 +9,7 @@ import (
 	"log"
 	"math/rand"
 	"os"
+	"path"
 	"strings"
 	"text/template"
 	"time"
@@ -83,31 +84,11 @@ func ListDir(root string) ([]string, error) {
 	return files, nil
 }
 
-func Render(w io.Writer, template_folder, template_filename string, data any) error {
+func Render(w io.Writer, template_filenames []string, data any) error {
 
-	template_filename_array := strings.Split(template_filename, "/")
-	template_base_path := template_filename_array[0]
-	template_file_path := template_filename_array[1]
+	name := path.Base(template_filenames[0])
 
-	abs_template_filename := fmt.Sprintf("%s/%s", template_folder, template_filename)
-	template_layout_path := fmt.Sprintf("%s/%s/layout/", template_folder, template_base_path)
-
-	files, err := ListDir(template_layout_path)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	afiles := []string{}
-	for _, f := range files {
-		afiles = append(afiles, fmt.Sprintf("%s%s", template_layout_path, f))
-	}
-	afiles = append(afiles, abs_template_filename)
-
-	//	tn := tfna[len(tfna)-1]
-	t, e := template.New(template_file_path).Funcs(template.FuncMap{
-		//	"Icon": Icon,
-		//		}).ParseFiles(tfn)
-	}).ParseFiles(afiles...)
+	t, e := template.New(name).Funcs(template.FuncMap{}).ParseFiles(template_filenames...)
 
 	if e == nil {
 		e = t.Execute(w, data)
