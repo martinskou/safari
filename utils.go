@@ -83,14 +83,14 @@ func ListDir(root string) ([]string, error) {
 	return files, nil
 }
 
-func Render(w io.Writer, template_filename string, data interface{}) error {
+func Render(w io.Writer, template_folder, template_filename string, data any) error {
 
 	template_filename_array := strings.Split(template_filename, "/")
 	template_base_path := template_filename_array[0]
 	template_file_path := template_filename_array[1]
 
-	abs_template_filename := fmt.Sprintf("templates/%s", template_filename)
-	template_layout_path := fmt.Sprintf("templates/%s/layout/", template_base_path)
+	abs_template_filename := fmt.Sprintf("%s/%s", template_folder, template_filename)
+	template_layout_path := fmt.Sprintf("%s/%s/layout/", template_folder, template_base_path)
 
 	files, err := ListDir(template_layout_path)
 	if err != nil {
@@ -124,7 +124,7 @@ func Render(w io.Writer, template_filename string, data interface{}) error {
 
 func RenderString(tfn string, data interface{}) string {
 	var buf bytes.Buffer
-	err := Render(&buf, tfn, data)
+	err := Render(&buf, "", tfn, data)
 	if err != nil {
 		return err.Error()
 	}
