@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"sort"
+	"strconv"
 	"time"
 
 	"github.com/martinskou/safari"
@@ -81,6 +82,12 @@ func test5() {
 
 }
 
+func test6() {
+	// y, e := strconv.Atoi(x)
+	x := "15"
+	fmt.Println(safari.Must(strconv.Atoi(x)))
+}
+
 func main() {
 	items := RandIntSlice(100)
 	s1 := make([]int, len(items))
@@ -93,6 +100,7 @@ func main() {
 
 	test5()
 
+	test6()
 	/*
 		listFloat := []float32{3.3, .5, 1.5, 22.3, 64.2, 7.1, 1.4, 2}
 		sortedFloats := quicksort.SortAll(listFloat, quicksort.CompareNumber[float32])

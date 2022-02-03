@@ -1,6 +1,8 @@
 package safari
 
-
+import "runtime/debug"
+import "os"
+import "fmt"
 
 func Map[N any, M any](lst []N, f func(N) M) []M {
 	vsm := make([]M, len(lst))
@@ -57,4 +59,19 @@ func MapValues[N any](mp map[string]N) []N {
 		lst = append(lst, v)
 	}	
 	return lst
+}
+
+type Pair[N, M any] struct {
+	first N
+	second M
+}
+
+func Must[N any](result N, err error ) N {
+	if err!=nil {
+		fmt.Printf("Must failed, terminating with error:\n")
+		fmt.Println(err)
+		debug.PrintStack()
+		os.Exit(0)
+	}
+	return result
 }
